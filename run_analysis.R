@@ -2,7 +2,7 @@ library(data.table)
 
 # Load datasets
 TrainingData <- read.table("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/train/X_train.txt")
-data.table::setnames(TrainingData, colnames(TrainingData), measurements)
+data.table::setnames(TrainingData, colnames(TrainingData), TheMeasurements)
 TrainingDataingActivities <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/train/Y_train.txt")
                          , col.names = c("Activity"))
 TrainingDataSubjects <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/train/subject_train.txt")
@@ -10,7 +10,7 @@ TrainingDataSubjects <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI 
 TrainingData <- cbind(TrainingDataSubjects, TrainingDataingActivities, TrainingData)
 
 TestingingData <- read.table("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/test/X_test.txt")
-data.table::setnames(TestingingData, colnames(TestingingData), measurements)
+data.table::setnames(TestingingData, colnames(TestingingData), TheMeasurements)
 TestingingDataActivities <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/test/Y_test.txt")
                         , col.names = c("Activity"))
 TestingingDataSubjects <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/test/subject_test.txt")
@@ -22,8 +22,8 @@ activity_labels <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI HAR D
 features <- fread(file.path("D:/Dokumenty/R - John Hopkins/data/UCI HAR Dataset/features.txt")
                   , col.names = c("index", "featureNames"))
 featuresForUs <- grep("(mean|std)\\(\\)", features[, featureNames])
-measurements <- features[featuresForUs, featureNames]
-measurements <- gsub('[()]', '', measurements)
+TheMeasurements <- features[featuresForUs, featureNames]
+TheMeasurements <- gsub('[()]', '', TheMeasurements)
 
 # merge datasets
 merged <- rbind(TrainingData, TestingingData)
