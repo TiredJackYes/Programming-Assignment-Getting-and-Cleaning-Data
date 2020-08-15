@@ -28,7 +28,7 @@ TheMeasurements <- gsub('[()]', '', TheMeasurements)
 # merge datasets
 merged <- rbind(TrainingData, TestingingData)
 
-# Convert classLabels to activityName basically. More explicit. 
+# Importing the actual activity names and Subject numbers (like WALKING) into the merged data set
 library(reshape2)
 merged[["Activity"]] <- factor(merged[, Activity]
                                  , levels = activity_labels[["classLabels"]]
