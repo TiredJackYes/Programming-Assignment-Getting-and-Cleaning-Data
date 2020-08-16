@@ -39,4 +39,5 @@ merged[["SubjectNum"]] <- as.factor(merged[, SubjectNum])
 merged <- reshape2::melt(data = merged, id = c("SubjectNum", "Activity"))
 merged <- reshape2::dcast(data = merged, SubjectNum + Activity ~ variable, fun.aggregate = mean)
 
-data.table::fwrite(x = merged, file = "tidyData.txt", quote = FALSE)
+## and finally creating the tidy data set
+write.table(x = merged, file = "tidy_data_set", row.names = FALSE)
